@@ -1,0 +1,7 @@
+build
+lib_managed
+src_managed
+target
+.DS_Store
+project/boot
+workspace.xml
