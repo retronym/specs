@@ -62,8 +62,9 @@ trait Classes extends ConsoleOutput {
         val shouldPrintStackTrace = printStackTrace || System.getProperty("debugCreateObject") != null
         val shouldPrintMessage = printMessage || System.getProperty("debugCreateObject") != null
         val msg = (shouldPrintMessage, shouldPrintStackTrace) match {
-          case (true, false) => "Could not instantiate class: " + className + ": " + e.getMessage
           case (_, true) => "Could not instantiate class: " + getFullStackTrace(e)
+          case (true, false) => "Could not instantiate class: " + className + ": " + e.getMessage
+          case (false, false) => ""
         }
         println(msg)
       }
