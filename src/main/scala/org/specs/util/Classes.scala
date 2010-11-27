@@ -21,6 +21,8 @@ import org.specs.io.Output
 import org.specs.io.ConsoleOutput
 import scala.reflect.ClassManifest
 import scala.reflect.NameTransformer
+import java.io.{StringWriter, PrintWriter}
+
 /**
  * This object provides simple functions to instantiate classes.
  */
@@ -57,8 +59,13 @@ trait Classes extends ConsoleOutput {
       return createInstanceOf[T](loadClass[T](className))
     } catch {
       case e => {
-        if (printMessage || System.getProperty("debugCreateObject") != null) println("Could not instantiate class " + className + ": " + e.getMessage)
-        if (printStackTrace || System.getProperty("debugCreateObject") != null) e.getStackTrace() foreach (println(_))
+        val shouldPrintStackTrace = printStackTrace || System.getProperty("debugCreateObject") != null
+        val shouldPrintMessage = printMessage || System.getProperty("debugCreateObject") != null
+        val msg = (shouldPrintMessage, shouldPrintStackTrace) match {
+          case (true, false) => "Could not instantiate class: " + className + ": " + e.getMessage
+          case (_, true) => "Could not instantiate class: " + getFullStackTrace(e)
+        }
+        println(msg)
       }
     }
     return None
@@ -174,4 +181,14 @@ trait Classes extends ConsoleOutput {
    */
   def getClassName[T](a: T): String = className(a.asInstanceOf[java.lang.Object].getClass)
 
+  private def getFullStackTrace(t: Throwable): String = {
+    val stringWriter = new java.io.StringWriter
+    val pr = new PrintWriter(stringWriter)
+    try {
+      t.printStackTrace(pr)
+    } finally {
+      pr.close
+    }
+    stringWriter.toString
+  }
 }
