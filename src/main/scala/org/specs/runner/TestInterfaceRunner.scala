@@ -66,7 +66,10 @@ class TestInterfaceRunner(loader: ClassLoader, val loggers: Array[Logger]) exten
   }
   def run(specification: Option[Specification]): Option[Specification] = run(specification, new DefaultEventHandler)
   def run(specification: Option[Specification], handler: EventHandler): Option[Specification] = {
-    def testInterfaceRunner(s: Specification) = new NotifierRunner(s, new TestInterfaceNotifier(handler, loggers, s.runConfiguration)) 
+    def testInterfaceRunner(s: Specification) = new NotifierRunner(s, new TestInterfaceNotifier(handler, loggers, s.runConfiguration)) with SurefireXml {
+      // TODO make production of surefire XML, and the outputDir, configurable through args.
+      override def outputDir = "target/surefire-reports"
+    }
     specification.map(testInterfaceRunner(_).reportSpecs)
     specification match {
       case Some(s: org.specs.runner.File) => s.reportSpecs
