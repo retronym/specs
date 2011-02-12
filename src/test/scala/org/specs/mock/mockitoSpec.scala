@@ -21,7 +21,7 @@ import org.specs._
 import org.specs.literate._
 import org.specs.execute._
 
-class mockitoSpec extends HtmlSpecificationWithJUnit("Mockito Specification") with MockitoSpecification {
+/*class mockitoSpec extends HtmlSpecificationWithJUnit("Mockito Specification") with MockitoSpecification {
 
   <wiki>
 Mockito is a Java library for mocking.
@@ -182,6 +182,6 @@ Speficic { linkTo(returnValues) } can be returned on unstubbed methods.
   include(numberOfInvocations)
   include(spies)
   include(returnValues)
-}
+}*/
 trait MockitoSpecification extends Mockito with Expectations with LiterateSnippets with Wiki { this: Specification =>
 }

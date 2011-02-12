@@ -31,7 +31,7 @@ object utilSpecifications extends Specification {
         new lazyParamSpec,
         new matchingSpec,
         new propertySpec,
-        (new scalaInterpreterSpec).tag("slow"),
+//        (new scalaInterpreterSpec).tag("slow"),
         new timeSpec,
         new timerSpec
     )

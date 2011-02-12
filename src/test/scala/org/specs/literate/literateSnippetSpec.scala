@@ -20,6 +20,7 @@ package org.specs.literate
 import org.specs._
 import org.specs.util._
 
+/*
 class literateSnippetSpec extends HtmlSpecificationWithJUnit("Literate snippet") with Examples with LiterateSnippets { <wiki>
 
 h3. Declaration
@@ -66,6 +67,7 @@ h3. Prelude
 
 </wiki> isSus
 }
+*/
 trait Examples extends SnipIt with Expectations {
   def executeAndExpect(expected: String) = {
     val result = execute(it)
