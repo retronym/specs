@@ -42,10 +42,10 @@ class fieldSpec extends org.spex.Specification {
       Field("label", 1.2345).toString must_== "label: 1.2345"
     }
     "have a toXhtml method returning the formatted value in a <td> cell" in {
-      Field("label", 1.2345).toXhtml.toList must ==(<td>label</td><td class="info">1.2345</td>.toList) 
+      Field("label", 1.2345).toXhtml.toList must ==(<td>label</td><td class="info">1.2345</td>.toList)
     }
     "have a toXhtml method omitting the label if it is empty" in {
-      Field(1.2345).toXhtml.toList must ==(<td class="info">1.2345</td>.toList) 
+      Field(1.2345).toXhtml.toList must ==(<td class="info">1.2345</td>.toList)
     }
     "have an equals method comparing labels and values" in {
       Field("l", 1.23) must_== Field("l", 1.23)
