@@ -47,9 +47,10 @@ class iterableMatchersSpec extends MatchersSpecification {
       expectation(List("one", "two") must containAll(List("one", "three"))) must failWith("'List(one, two)' doesn't contain all of 'List(one, three)'")
     }
     "provide a 'must containInOrder' matcher on iterables checking if one sequence is included inside another" in {
-      List("one", "two", "three") must containInOrder(List("one", "two"))
+      // TODO 2.9 How did this line work before without `: _*`?
+      List("one", "two", "three") must containInOrder(List("one", "two") : _*)
       List("one", "two", "three") must containInOrder("one", "two")
-      expectation(List("one", "two") must containInOrder(List("two", "one"))) must failWith("'List(one, two)' doesn't contain all of 'List(two, one)' in order")
+      expectation(List("one", "two") must containInOrder(List("two", "one"): _*)) must failWith("'List(one, two)' doesn't contain all of 'List(two, one)' in order")
     }
     "provide a 'must beIn' matcher on iterables: 'one' must beIn(List('one', 'two'))" in {
       "one" must beIn(List("one", "two"))
